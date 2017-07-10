@@ -28,7 +28,7 @@ public class Inflector {
 		this.lang = lang;
 		this.dict = new Dictionary(
 				lang, 
-				data + lang + File.separatorChar + "dicc_nouns.src", 
+				data + lang + File.separatorChar + "dicc.src", 
 				true, 
 				data + lang + File.separatorChar + "afixos.dat", 
 				true,
