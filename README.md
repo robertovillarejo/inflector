@@ -9,7 +9,8 @@ Descarga Freeling desde el repositorio oficial:
 
 ## Variable de entorno
 Establece la variable de entorno `FREELINGDIR=[freeling dir absolut path]`  
-Por ejemplo `FREELINGDIR=C:\freeling-3.1-win64`  
+Por ejemplo `FREELINGDIR=C:\freeling-3.1-win64\data` en Windows  
+o `FREELINGDIR=/usr/local/share/freeling/data` en Linux
 
 ## Maven
 Ejecuta el siguiente comando para agregar el jar de Freeling al repositorio local de Maven. Sustituye `[FREELINGJAR]` por la ruta adecuada.  
