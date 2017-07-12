@@ -20,17 +20,17 @@ public class Inflector {
 	private final String lang;
 
 	/**
-	 * 
+	 *
 	 * @param data The Freeling data folder
 	 * @param lang The language in ISO639-1 format
 	 */
 	public Inflector(String data, String lang) {
 		this.lang = lang;
 		this.dict = new Dictionary(
-				lang, 
-				data + lang + File.separatorChar + "dicc_nouns.src", 
-				true, 
-				data + lang + File.separatorChar + "afixos.dat", 
+				lang,
+				data + lang + File.separatorChar + "dicc.src",
+				true,
+				data + lang + File.separatorChar + "afixos.dat",
 				true,
 				true);
 	}
@@ -57,7 +57,7 @@ public class Inflector {
 		Response response = new Response(word, lang);
 		TreeMap<String, String> lemmaTag = this.searchOnDictionary(word);
 
-		if (lemmaTag.size() > 0) {		
+		if (lemmaTag.size() > 0) {
 			response.setFound(true);
 			response.setResult(lemmaTag.keySet());
 		}
@@ -69,7 +69,7 @@ public class Inflector {
 	 * @param word
 	 * @return the response
 	 */
-	public Response pluralize (String word) {	
+	public Response pluralize (String word) {
 		Response response = new Response(word, lang);
 		TreeMap<String, String> lemmaTag = this.searchOnDictionary(word);
 
@@ -83,16 +83,15 @@ public class Inflector {
 				String invariableTag = "NC" + genre + "N000";
 
 				ListString forms = dict.getForms(lemma, pluralTag);
-				ListString formsNeutral = dict.getForms(lemma, invariableTag);	
-				
+				ListString formsNeutral = dict.getForms(lemma, invariableTag);
 				if (!formsNeutral.empty()) {
 					forms.pushBack(formsNeutral.front());	// Invariable words only return one result
-				}		
+				}
 
 				while (!forms.empty()) {
 					if (!"".equals(forms.front())) {
 						plurals.add(forms.front());
-					}					
+					}
 					forms.popFront();
 				}
 			}
