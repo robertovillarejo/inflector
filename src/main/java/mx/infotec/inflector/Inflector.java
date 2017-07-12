@@ -84,7 +84,9 @@ public class Inflector {
 
 				ListString forms = dict.getForms(lemma, pluralTag);
 				ListString formsNeutral = dict.getForms(lemma, invariableTag);	
-				forms.pushBack(formsNeutral.front());	// Invariable words only return one result			
+				if (!formsNeutral.empty()) {
+					forms.pushBack(formsNeutral.front());	// Invariable words only return one result
+				}			
 
 				while (!forms.empty()) {
 					if (!"".equals(forms.front())) {
