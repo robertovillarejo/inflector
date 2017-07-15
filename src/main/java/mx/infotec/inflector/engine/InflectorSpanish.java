@@ -1,4 +1,4 @@
-package mx.infotec.inflector;
+package mx.infotec.inflector.engine;
 import java.util.Set;
 import java.util.TreeMap;
 

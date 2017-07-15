@@ -1,4 +1,4 @@
-package mx.infotec.inflector;
+package mx.infotec.inflector.web;
 
 /**
  * Wrapper for the result of processing with Inflector

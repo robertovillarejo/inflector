@@ -1,4 +1,4 @@
-package mx.infotec.inflector;
+package mx.infotec.inflector.engine;
 
 public interface Inflector {
 	
