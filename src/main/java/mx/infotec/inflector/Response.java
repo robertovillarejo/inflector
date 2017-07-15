@@ -1,5 +1,4 @@
 package mx.infotec.inflector;
-import java.util.Set;
 
 /**
  * Wrapper for the result of processing with Inflector
@@ -11,12 +10,12 @@ public class Response {
 	/**
 	 * The analyzed word itself
 	 */
-	private String word = null;
+	private String word = "";
 	
 	/**
 	 * Language in which word was analyzed
 	 */
-	private String lang = null;
+	private String lang = "";
 	
 	/**
 	 * Word was found on dictionary or not
@@ -26,7 +25,7 @@ public class Response {
 	/**
 	 * Results for the analysis
 	 */
-	private Set<String> result = null;
+	private String result = "";
 	
 	public String getLang() {
 		return lang;
@@ -52,11 +51,11 @@ public class Response {
 		this.found = found;
 	}
 
-	public Set<String> getResult() {
+	public String getResult() {
 		return result;
 	}
 
-	public void setResult(Set<String> result) {
+	public void setResult(String result) {
 		this.result = result;
 	}
 	
