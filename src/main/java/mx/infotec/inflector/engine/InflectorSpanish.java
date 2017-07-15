@@ -1,4 +1,5 @@
 package mx.infotec.inflector.engine;
+import java.io.File;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -24,9 +25,9 @@ public class InflectorSpanish implements Inflector{
 	public InflectorSpanish(String data, String lang) {
 		this.dict = new Dictionary(
 				lang, 
-				data + lang + "\\dicc_nouns.src", 
+				data + lang + File.separatorChar + "dicc_nouns.src", 
 				true, 
-				data + lang + "\\afixos.dat", 
+				data + lang + File.separatorChar + "afixos.dat", 
 				true,
 				true);
 	}
