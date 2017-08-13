@@ -1,19 +1,12 @@
 # Inflector REST
-Inflector (singulariza y pluraliza pronombres) implementado en un servicio REST.  
+Inflector implemented in REST service
 
-# Instalación
+# Usage
 
-## Descarga
-Descarga Freeling desde el repositorio oficial:  
-[Freeling 3.1 (Windows 64 bits)](http://devel.cpl.upc.edu/freeling/downloads/33)  
+## Singularize
+`http://localhost:8080/api/es/singularize?word=alumnos`  
+returns `{"word":"alumnos","lang":"es","found":true,"result":"alumno"}`
 
-## Variable de entorno
-Establece la variable de entorno `FREELINGDIR=[freeling dir absolut path]`  
-Por ejemplo `FREELINGDIR=C:\freeling-3.1-win64\data` en Windows  
-o `FREELINGDIR=/usr/local/share/freeling/data` en Linux
-
-## Maven
-Ejecuta el siguiente comando para agregar el jar de Freeling al repositorio local de Maven. Sustituye `[FREELINGJAR]` por la ruta adecuada.  
-`mvn install:install-file -Dfile=[FREELINGJAR] -DgroupId=edu.upc.freeling -DartifactId=freeling -Dversion=3.1 -Dpackaging=jar`  
-
-Si no estás usando un IDE, ejecuta `mvn install` dentro de la carpeta del proyecto  
+## Pluralize
+`http://localhost:8080/api/es/pluralize?word=alumno`  
+returns `{"word":"alumno","lang":"es","found":true,"result":"alumnos"}`
