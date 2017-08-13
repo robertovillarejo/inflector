@@ -1,52 +1,28 @@
 package mx.infotec.inflector.engine;
-import java.io.File;
-import java.util.Set;
-import java.util.TreeMap;
+import java.io.BufferedReader;
+import java.io.IOException;
 
-import edu.upc.freeling.Analysis;
-import edu.upc.freeling.Dictionary;
-import edu.upc.freeling.ListAnalysis;
-import edu.upc.freeling.ListString;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import mx.infotec.inflector.engine.Dictionary.Analysis;
 
 /**
- * Provides some methods to singularize or pluralize a word
+ * 
  * @author Roberto Villarejo Martinez <roberto.villarejo@infotec.mx>
  *
  */
 public class InflectorSpanish implements Inflector{
 
-	private final Dictionary dict;
-
-	/**
-	 * 
-	 * @param data The Freeling data folder
-	 * @param lang The language in ISO639-1 format
-	 */
-	public InflectorSpanish(String data, String lang) {
-		this.dict = new Dictionary(
-				lang, 
-				data + lang + File.separatorChar + "dicc_nouns.src", 
-				true, 
-				data + lang + File.separatorChar + "afixos.dat", 
-				true,
-				true);
-	}
-
-	private TreeMap<String, String> searchOnDictionary(String word) {
-		TreeMap<String, String> lemmaTag = new TreeMap<>();
-		ListAnalysis analysis;
-		analysis = new ListAnalysis();
-		dict.searchForm(word.toLowerCase(), analysis);
-		while (!analysis.empty()) {
-			Analysis a = analysis.front();
-			lemmaTag.put(a.getLemma(), a.getTag());
-			analysis.popFront();
-		}
-		return lemmaTag;
+	public final Dictionary dict;
+	public final Logger log = LoggerFactory.getLogger(InflectorSpanish.class);
+	
+	public InflectorSpanish(BufferedReader reader) throws IOException {
+		dict = new Dictionary(reader);
 	}
 
 	/**
-	 * Singularize a word (returns the lemma)
+	 * Singularize a word
 	 * @param word
 	 * @return the response
 	 */
@@ -64,32 +40,22 @@ public class InflectorSpanish implements Inflector{
 	}
 	
 	private String process(String word, char number) {
+				
+		Analysis an = dict.searchForm(word);
+		if (an == null) return "";
 		
-		TreeMap<String, String> lemmaTag = this.searchOnDictionary(word);
-
-		Set<String> lemas = lemmaTag.keySet();
-		String result = null;
-		for (String lemma : lemas) {
-			if (lemmaTag.get(lemma).length() > 2) {	// Ignores some tags
-				char genre = lemmaTag.get(lemma).charAt(2);	// Can be 'M' or 'F'
-
-				String pluralTag = "NC" + genre + number + "000";
-				String invariableTag = "NC" + genre + number + "000";
-
-				ListString forms = dict.getForms(lemma, pluralTag);
-				ListString formsNeutral = dict.getForms(lemma, invariableTag);	
-
-				if (!formsNeutral.empty()) {
-					result = formsNeutral.front();	// Invariable words only return one result
-				} else {
-					if (!forms.empty()) {
-						result = forms.front();
-					}
-				}
-			}
-
-		}
-		return result;
+		char genre = an.getTag().charAt(2);	// Can be 'M' or 'F'
+		String pluralTag = "NC" + genre + number + "000";
+		
+		String result;
+		result = dict.getForms(an.getLemma(), pluralTag);
+		
+		if (result == null ) return result;
+		
+		String invariableTag = "NC" + genre + number + "000";
+		
+		return dict.getForms(an.getLemma(), invariableTag);
+		
 	}
 
 	@Override

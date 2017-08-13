@@ -47,7 +47,7 @@ public class Response {
 		return found;
 	}
 
-	public void setFound(boolean found) {
+	public void isFound(boolean found) {
 		this.found = found;
 	}
 
