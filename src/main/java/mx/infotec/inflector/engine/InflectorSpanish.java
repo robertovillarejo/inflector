@@ -40,9 +40,8 @@ public class InflectorSpanish implements Inflector{
 	}
 	
 	private String process(String word, char number) {
-				
 		Analysis an = dict.searchForm(word);
-		if (an == null) return "";
+		if (an == null) return null;
 		
 		char genre = an.getTag().charAt(2);	// Can be 'M' or 'F'
 		String pluralTag = "NC" + genre + number + "000";
@@ -50,12 +49,11 @@ public class InflectorSpanish implements Inflector{
 		String result;
 		result = dict.getForms(an.getLemma(), pluralTag);
 		
-		if (result == null ) return result;
+		if (result != null ) return result;
 		
-		String invariableTag = "NC" + genre + number + "000";
+		String invariableTag = "NC" + genre + "N000";
 		
 		return dict.getForms(an.getLemma(), invariableTag);
-		
 	}
 
 	@Override
