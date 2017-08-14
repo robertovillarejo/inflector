@@ -12,12 +12,12 @@ import mx.infotec.inflector.engine.Dictionary.Analysis;
  * @author Roberto Villarejo Martinez <roberto.villarejo@infotec.mx>
  *
  */
-public class InflectorSpanish implements Inflector{
+public class SpanishInflector implements Inflector{
 
 	public final Dictionary dict;
-	public final Logger log = LoggerFactory.getLogger(InflectorSpanish.class);
+	public final Logger log = LoggerFactory.getLogger(SpanishInflector.class);
 	
-	public InflectorSpanish(BufferedReader reader) throws IOException {
+	public SpanishInflector(BufferedReader reader) throws IOException {
 		dict = new Dictionary(reader);
 	}
 
