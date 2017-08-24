@@ -50,6 +50,16 @@ public class InflectorController {
 		return response;
 	}
 	
+	@GetMapping(path="/camelCase")
+	public String camelCase(@RequestParam String word, @RequestParam boolean uppercaseFirstLetter, @RequestParam char...delimiterChars) {
+		return esInflector.camelCase(word, uppercaseFirstLetter, delimiterChars);
+	}
+	
+	@GetMapping(path="/underscore")
+	public String underscore(@RequestParam String word, @RequestParam char...delimiterChars) {
+		return esInflector.underscore(word, delimiterChars);
+	}
+	
 	@GetMapping(path="/en/singularize")
 	public Response enSingularize(@RequestParam String word) {
 		Response response = new Response(word, "en");

@@ -56,24 +56,4 @@ public class SpanishInflector implements Inflector{
 		return dict.getForms(an.getLemma(), invariableTag);
 	}
 
-	@Override
-	public String camelize(String word) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public String underscore(String word) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public String humanize(String word) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public boolean isCountable(String word) {
-		throw new UnsupportedOperationException();
-	}
-
 }
