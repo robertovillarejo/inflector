@@ -60,6 +60,11 @@ public class InflectorController {
 		return esInflector.underscore(word, delimiterChars);
 	}
 	
+	@GetMapping(path="/humanize")
+	public String humanize(@RequestParam String word, @RequestParam String...removableTokens) {
+		return esInflector.humanize(word, removableTokens);
+	}
+	
 	@GetMapping(path="/en/singularize")
 	public Response enSingularize(@RequestParam String word) {
 		Response response = new Response(word, "en");
