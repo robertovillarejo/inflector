@@ -1,7 +1,0 @@
-.. Inflector-REST examples file, created by
-   Roberto Villarejo on Fri Sep 15 17:24:14 2017.
-
-Examples:
-==========================================
-
-Some examples goes here
