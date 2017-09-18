@@ -50,8 +50,8 @@ public class InflectorController {
 		return response;
 	}
 	
-	@GetMapping(path="/camelCase")
-	public String camelCase(@RequestParam String word, @RequestParam boolean uppercaseFirstLetter, @RequestParam char...delimiterChars) {
+	@GetMapping(path="/camelize")
+	public String camelize(@RequestParam String word, @RequestParam boolean uppercaseFirstLetter, @RequestParam char...delimiterChars) {
 		return esInflector.camelCase(word, uppercaseFirstLetter, delimiterChars);
 	}
 	
