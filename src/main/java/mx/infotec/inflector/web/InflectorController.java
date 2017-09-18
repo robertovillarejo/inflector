@@ -8,28 +8,32 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import mx.infotec.inflector.engine.InflectorSpanish;
+import mx.infotec.inflector.engine.EnglishInflector;
+import mx.infotec.inflector.engine.SpanishInflector;
 
 @RestController
 @RequestMapping("/api")
 public class InflectorController {
-	private InflectorSpanish esInflector;
-	private List<String> langsSupported = Arrays.asList("es");
+	private SpanishInflector esInflector;
+	private EnglishInflector enInflector;
+	private List<String> langsSupported = Arrays.asList("es", "en");
 	
 	public InflectorController() throws IOException {
 		InputStream in = getClass().getClassLoader().getResourceAsStream("data/es/MM.nom");
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in));
-		esInflector = new InflectorSpanish(bufferedReader);
+		esInflector = new SpanishInflector(bufferedReader);
+		in = getClass().getClassLoader().getResourceAsStream("data/en/noms");
+		bufferedReader = new BufferedReader(new InputStreamReader(in));
+		enInflector = new EnglishInflector(bufferedReader);
 	}
 
 	@GetMapping(path="/es/singularize")
-	public Response singularize(@RequestParam String word) {
+	public Response esSingularize(@RequestParam String word) {
 		Response response = new Response(word, "es");
 		String result = esInflector.singularize(word);
 		if (result != null) response.isFound(true);
@@ -38,9 +42,42 @@ public class InflectorController {
 	}
 	
 	@GetMapping(path="/es/pluralize")
-	public Response pluralize(@RequestParam String word) {
+	public Response esPluralize(@RequestParam String word) {
 		Response response = new Response(word, "es");
 		String result = esInflector.pluralize(word);
+		if (result != null) response.isFound(true);
+		response.setResult(result);
+		return response;
+	}
+	
+	@GetMapping(path="/camelize")
+	public String camelize(@RequestParam String word, @RequestParam boolean uppercaseFirstLetter, @RequestParam char...delimiterChars) {
+		return esInflector.camelCase(word, uppercaseFirstLetter, delimiterChars);
+	}
+	
+	@GetMapping(path="/underscore")
+	public String underscore(@RequestParam String word, @RequestParam char...delimiterChars) {
+		return esInflector.underscore(word, delimiterChars);
+	}
+	
+	@GetMapping(path="/humanize")
+	public String humanize(@RequestParam String word, @RequestParam String...removableTokens) {
+		return esInflector.humanize(word, removableTokens);
+	}
+	
+	@GetMapping(path="/en/singularize")
+	public Response enSingularize(@RequestParam String word) {
+		Response response = new Response(word, "en");
+		String result = enInflector.singularize(word);
+		if (result != null) response.isFound(true);
+		response.setResult(result);
+		return response;
+	}
+	
+	@GetMapping(path="/en/pluralize")
+	public Response enPluralize(@RequestParam String word) {
+		Response response = new Response(word, "en");
+		String result = enInflector.pluralize(word);
 		if (result != null) response.isFound(true);
 		response.setResult(result);
 		return response;

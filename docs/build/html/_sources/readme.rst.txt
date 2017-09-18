@@ -1,3 +1,6 @@
+Inflector-REST
+==============
+
 # Inflector REST
 
 This inflector is a microservice written in Java (Spring Boot Framework) implemented in a REST service. The linguistic data was taken from the popular library [Freeling](https://github.com/TALP-UPC/FreeLing).
@@ -36,35 +39,35 @@ mvn spring-boot:run`
 
 ## Examples
 ### Get the singular form of a word in english
-`curl 'http://localhost:8080/api/en/singularize?word=dogs'`  
+`curl 'http://localhost:8080/api/en/singularize?word=dogs'`
 
-Returns:  
+Returns:
 `{"word":"dogs","lang":"en","found":true,"result":"dog"}`
 
 ### Get the plural form of a word in spanish:
-`curl 'http://localhost:8080/api/es/pluralize?word=perro'`  
+`curl 'http://localhost:8080/api/es/pluralize?word=perro'`
 
-Returns:  
-`{"word":"perro","lang":"es","found":true,"result":"perros"}`  
+Returns:
+`{"word":"perro","lang":"es","found":true,"result":"perros"}`
 
 ### Camelize a String
-The following command formats `tareas_alumno` to `TareasAlumno`.  
+The following command formats `tareas_alumno` to `TareasAlumno`.
 You can set `uppercaseFirstLetter` to `false` as appropiate to your application.
-Only underscore `_` is passed as delimiter but can be more characters.  
+Only underscore `_` is passed as delimiter but can be more characters.
 
-`curl 'http://localhost:8080/api/camelize?word=alumno_id&uppercaseFirstLetter=true&delimiterChars=_'`  
+`curl 'http://localhost:8080/api/camelize?word=alumno_id&uppercaseFirstLetter=true&delimiterChars=_'`
 
-Returns:  
+Returns:
 `AlumnoId`
 
 ## Underscore a String
-`curl 'http://localhost:8080/api/underscore?word=AlumnoId&delimiterChars= '`  
+`curl 'http://localhost:8080/api/underscore?word=AlumnoId&delimiterChars= '`
 
-Returns:  
+Returns:
 `alumno_id`
 
 ## Humanize a String
-`curl 'http://localhost:8080/api/humanize?word=alumno_id&removableTokens=_'`  
+`curl 'http://localhost:8080/api/humanize?word=alumno_id&removableTokens=_'`
 
-Returns:  
+Returns:
 `Alumno`

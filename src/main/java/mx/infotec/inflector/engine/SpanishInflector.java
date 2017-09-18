@@ -12,12 +12,12 @@ import mx.infotec.inflector.engine.Dictionary.Analysis;
  * @author Roberto Villarejo Martinez <roberto.villarejo@infotec.mx>
  *
  */
-public class InflectorSpanish implements Inflector{
+public class SpanishInflector implements Inflector{
 
 	public final Dictionary dict;
-	public final Logger log = LoggerFactory.getLogger(InflectorSpanish.class);
+	public final Logger log = LoggerFactory.getLogger(SpanishInflector.class);
 	
-	public InflectorSpanish(BufferedReader reader) throws IOException {
+	public SpanishInflector(BufferedReader reader) throws IOException {
 		dict = new Dictionary(reader);
 	}
 
@@ -40,7 +40,6 @@ public class InflectorSpanish implements Inflector{
 	}
 	
 	private String process(String word, char number) {
-				
 		Analysis an = dict.searchForm(word);
 		if (an == null) return null;
 		
@@ -55,27 +54,6 @@ public class InflectorSpanish implements Inflector{
 		String invariableTag = "NC" + genre + "N000";
 		
 		return dict.getForms(an.getLemma(), invariableTag);
-		
-	}
-
-	@Override
-	public String camelize(String word) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public String underscore(String word) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public String humanize(String word) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public boolean isCountable(String word) {
-		throw new UnsupportedOperationException();
 	}
 
 }
