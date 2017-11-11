@@ -2,20 +2,15 @@ package mx.infotec.inflector.engine;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import mx.infotec.inflector.engine.Dictionary.Analysis;
 
 /**
- * 
+ * The Spanish Inflector
  * @author Roberto Villarejo Martinez <roberto.villarejo@infotec.mx>
  *
  */
 public class SpanishInflector implements Inflector{
 
-	public final Dictionary dict;
-	public final Logger log = LoggerFactory.getLogger(SpanishInflector.class);
+	private final Dictionary dict;
 	
 	public SpanishInflector(BufferedReader reader) throws IOException {
 		dict = new Dictionary(reader);

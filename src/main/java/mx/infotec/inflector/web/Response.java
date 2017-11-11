@@ -1,11 +1,18 @@
 package mx.infotec.inflector.web;
 
+import java.io.Serializable;
+
 /**
  * Wrapper for the result of processing with Inflector
- * @author Roberto Villarejo Mart�nez <roberto.villarejo@infotec.mx>
+ * @author Roberto Villarejo Martinez <roberto.villarejo@infotec.mx>
  *
  */
-public class Response {
+public class Response implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6420802271148220168L;
 
 	/**
 	 * The analyzed word itself

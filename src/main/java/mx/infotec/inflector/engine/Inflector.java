@@ -3,6 +3,11 @@ package mx.infotec.inflector.engine;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * 
+ * @author Roberto Villarejo Martinez <roberto.villarejo@infotec.mx>
+ *
+ */
 public interface Inflector {
 
 	/**
