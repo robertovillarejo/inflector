@@ -8,41 +8,43 @@ import java.io.InputStreamReader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import mx.infotec.inflector.engine.EnglishInflector;
-import mx.infotec.inflector.engine.SpanishInflector;
+import mx.infotec.inflector.engine.Dictionary;
 
 /**
- * Instantiate the Inflectors (Spanish and English)
+ * Instantiate the Dictionaries (Spanish and English)
+ * 
  * @author Roberto Villarejo Martinez <roberto.villarejo@infotec.mx>
  *
  */
 @Configuration
 public class InflectorConfiguration {
-	
+
 	private final ClassLoader classLoader = InflectorConfiguration.class.getClassLoader();
-	
+
 	/**
-	 * Creates the Spanish Inflector
-	 * @return the Spanish Inflector
+	 * Creates the Spanish Dictionary
+	 * 
+	 * @return the dictionary
 	 * @throws IOException
 	 */
-	@Bean
-	public SpanishInflector spanishInflectorBean() throws IOException {
+	@Bean("spanishDict")
+	public Dictionary spanishDictionary() throws IOException {
 		InputStream in = classLoader.getResourceAsStream("data/es/MM.nom");
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in));
-		return new SpanishInflector(bufferedReader);
+		return new Dictionary(bufferedReader);
 	}
-	
+
 	/**
-	 * Creates the English Inflector
-	 * @return the English Inflector
+	 * Creates the English Dictionary
+	 * 
+	 * @return the dictionary
 	 * @throws IOException
 	 */
-	@Bean
-	public EnglishInflector englishInflectorBean() throws IOException {
+	@Bean("englishDict")
+	public Dictionary englishDictionary() throws IOException {
 		InputStream in = classLoader.getResourceAsStream("data/en/noms");
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in));
-		return new EnglishInflector(bufferedReader);
+		return new Dictionary(bufferedReader);
 	}
 
 }
