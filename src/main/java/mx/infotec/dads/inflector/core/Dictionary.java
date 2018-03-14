@@ -1,4 +1,4 @@
-package mx.infotec.inflector.engine;
+package mx.infotec.dads.inflector.core;
 
 import java.io.BufferedReader;
 import java.io.IOException;

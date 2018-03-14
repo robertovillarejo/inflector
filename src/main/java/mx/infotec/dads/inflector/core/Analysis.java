@@ -1,4 +1,4 @@
-package mx.infotec.inflector.engine;
+package mx.infotec.dads.inflector.core;
 
 /**
  * The analysis of a Word

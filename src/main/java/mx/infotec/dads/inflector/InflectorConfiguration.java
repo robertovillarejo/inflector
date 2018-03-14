@@ -1,4 +1,4 @@
-package mx.infotec.inflector;
+package mx.infotec.dads.inflector;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import mx.infotec.inflector.engine.Dictionary;
+import mx.infotec.dads.inflector.core.Dictionary;
 
 /**
  * Instantiate the Dictionaries (Spanish and English)

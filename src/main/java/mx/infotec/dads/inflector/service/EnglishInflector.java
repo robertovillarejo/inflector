@@ -1,7 +1,11 @@
-package mx.infotec.inflector.engine;
+package mx.infotec.dads.inflector.service;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+
+import mx.infotec.dads.inflector.core.Analysis;
+import mx.infotec.dads.inflector.core.Dictionary;
+import mx.infotec.dads.inflector.core.Inflector;
 
 /**
  * The English Inflector
