@@ -26,11 +26,22 @@ package mx.infotec.dads.nlp.inflector.util;
 
 import java.text.Normalizer;
 
+/**
+ * String Utils
+ * 
+ * @author Roberto Villarejo Martínez <robertovillarejom@infotec.mx>
+ *
+ */
 public class StringUtils {
 
 	private StringUtils() {
 	}
 
+	/**
+	 * Unaccent a text
+	 * @param src
+	 * @return text unaccented
+	 */
 	public static String unaccent(String src) {
 		return Normalizer.normalize(src, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
 	}
