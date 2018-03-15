@@ -1,4 +1,4 @@
-# Inflector REST
+# Inflector
 
 This inflector is a library for Java. The linguistic data was taken from the popular library [Freeling](https://github.com/TALP-UPC/FreeLing).
 
