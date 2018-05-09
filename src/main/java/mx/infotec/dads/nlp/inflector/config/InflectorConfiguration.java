@@ -33,6 +33,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import mx.infotec.dads.nlp.inflector.core.Dictionary;
+import mx.infotec.dads.nlp.inflector.core.DictionaryUnaccented;
 
 /**
  * Instantiate the Dictionaries (Spanish and English)
@@ -43,32 +44,32 @@ import mx.infotec.dads.nlp.inflector.core.Dictionary;
 @Configuration
 public class InflectorConfiguration {
 
-	private final ClassLoader classLoader = InflectorConfiguration.class.getClassLoader();
+    private final ClassLoader classLoader = InflectorConfiguration.class.getClassLoader();
 
-	/**
-	 * Creates the Spanish Dictionary
-	 * 
-	 * @return the dictionary
-	 * @throws IOException
-	 */
-	@Bean("spanishDict")
-	public Dictionary spanishDictionary() throws IOException {
-		InputStream in = classLoader.getResourceAsStream("data/es/MM.nom");
-		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in));
-		return new Dictionary(bufferedReader);
-	}
+    /**
+     * Creates the Spanish Dictionary
+     * 
+     * @return the dictionary
+     * @throws IOException
+     */
+    @Bean("spanishDict")
+    public Dictionary spanishDictionary() throws IOException {
+        InputStream in = classLoader.getResourceAsStream("data/es/MM.nom");
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in));
+        return new DictionaryUnaccented(bufferedReader);
+    }
 
-	/**
-	 * Creates the English Dictionary
-	 * 
-	 * @return the dictionary
-	 * @throws IOException
-	 */
-	@Bean("englishDict")
-	public Dictionary englishDictionary() throws IOException {
-		InputStream in = classLoader.getResourceAsStream("data/en/noms");
-		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in));
-		return new Dictionary(bufferedReader);
-	}
+    /**
+     * Creates the English Dictionary
+     * 
+     * @return the dictionary
+     * @throws IOException
+     */
+    @Bean("englishDict")
+    public Dictionary englishDictionary() throws IOException {
+        InputStream in = classLoader.getResourceAsStream("data/en/noms");
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in));
+        return new DictionaryUnaccented(bufferedReader);
+    }
 
 }

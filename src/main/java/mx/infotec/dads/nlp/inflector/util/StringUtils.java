@@ -34,16 +34,17 @@ import java.text.Normalizer;
  */
 public class StringUtils {
 
-	private StringUtils() {
-	}
+    private StringUtils() {
+    }
 
-	/**
-	 * Unaccent a text
-	 * @param src
-	 * @return text unaccented
-	 */
-	public static String unaccent(String src) {
-		return Normalizer.normalize(src, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
-	}
+    /**
+     * Unaccent a text
+     * 
+     * @param src
+     * @return text unaccented
+     */
+    public static String unaccent(String src) {
+        return Normalizer.normalize(src, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+    }
 
 }

@@ -1,7 +1,7 @@
 /*
  *  
  * The MIT License (MIT)
- * Copyright (c) 2018 Roberto Villarejo Martínez <robertovillarejom@gmail.com>
+ * Copyright (c) 2018 Roberto Villarejo Martínez <roberto.villarejo@infotec.mx>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,64 +24,23 @@
 
 package mx.infotec.dads.nlp.inflector.core;
 
-import static mx.infotec.dads.nlp.inflector.util.StringUtils.unaccent;
+public interface Dictionary {
 
-import java.io.BufferedReader;
-import java.io.IOException;
+    /**
+     * Search the Analysis of a Word
+     * 
+     * @param word
+     * @return
+     */
+    public Analysis searchForm(String word);
 
-import org.apache.commons.collections4.BidiMap;
-import org.apache.commons.collections4.bidimap.DualHashBidiMap;
-
-/**
- * A Dictionary Each entry has at least a form and one or many lemma-tag pairs
- * 
- * @author Roberto Villarejo Martinez <roberto.villarejo@infotec.mx>
- *
- */
-public class Dictionary {
-
-	private final BidiMap<String, Analysis> entries = new DualHashBidiMap<>();
-	private final BidiMap<Analysis, String> reverseEntries;
-
-	/**
-	 * Constructor
-	 * 
-	 * @param reader
-	 * @throws IOException
-	 */
-	public Dictionary(BufferedReader reader) throws IOException {
-		String entry = reader.readLine();
-		while (entry != null) {
-			String[] elements = entry.split(" ");
-			String word = unaccent(elements[0]);
-			String lemma = unaccent(elements[1]);
-			String tag = elements[2];
-			entries.put(word, new Analysis(lemma, tag));
-			entry = reader.readLine();
-		}
-		reader.close();
-		reverseEntries = entries.inverseBidiMap();
-	}
-
-	/**
-	 * Search the Analysis of a Word
-	 * 
-	 * @param word
-	 * @return
-	 */
-	public Analysis searchForm(String word) {
-		return entries.get(word.toLowerCase());
-	}
-
-	/**
-	 * Search the form of a given lemma-tag pair
-	 * 
-	 * @param lemma
-	 * @param tag
-	 * @return
-	 */
-	public String getForms(String lemma, String tag) {
-		return reverseEntries.get(new Analysis(lemma, tag));
-	}
+    /**
+     * Search the form of a given lemma-tag pair
+     * 
+     * @param lemma
+     * @param tag
+     * @return
+     */
+    public String getForms(String lemma, String tag);
 
 }

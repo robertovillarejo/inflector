@@ -34,25 +34,26 @@ import java.util.regex.Pattern;
  */
 public interface Inflector {
 
-	/**
-	 * Singularize a word
-	 * @param word
-	 * @return the response
-	 */
-	String singularize(String word);
+    /**
+     * Singularize a word
+     * 
+     * @param word
+     * @return the response
+     */
+    String singularize(String word);
 
-	/**
-	 * Pluralize given word
-	 * @param word
-	 * @return the response
-	 */
-	String pluralize(String word);
+    /**
+     * Pluralize given word
+     * 
+     * @param word
+     * @return the response
+     */
+    String pluralize(String word);
 
-	/**
-     * Makes an underscored form from the expression in the string (the reverse
-     * of the {@link #camelCase(String, boolean, char[]) camelCase} method. Also
-     * changes any characters that match the supplied delimiters into
-     * underscore.
+    /**
+     * Makes an underscored form from the expression in the string (the reverse of
+     * the {@link #camelCase(String, boolean, char[]) camelCase} method. Also
+     * changes any characters that match the supplied delimiters into underscore.
      * <p>
      * Examples:
      * 
@@ -72,8 +73,8 @@ public interface Inflector {
      * @param delimiterChars
      *            optional characters that are used to delimit word boundaries
      *            (beyond capitalization)
-     * @return a lower-cased version of the input, with separate words delimited
-     *         by the underscore character.
+     * @return a lower-cased version of the input, with separate words delimited by
+     *         the underscore character.
      * @author jboss
      */
     public default String underscore(String camelCaseWord, char... delimiterChars) {
@@ -135,99 +136,98 @@ public interface Inflector {
         return capitalize(result);
     }
 
-	/**
-	 * By default, this method converts strings to UpperCamelCase. If the
-	 * <code>uppercaseFirstLetter</code> argument to false, then this method
-	 * produces lowerCamelCase. This method will also use any extra delimiter
-	 * characters to identify word boundaries.
-	 * <p>
-	 * Examples:
-	 * 
-	 * <pre>
-	 *   inflector.camelCase(&quot;active_record&quot;,false)    #=&gt; &quot;activeRecord&quot;
-	 *   inflector.camelCase(&quot;active_record&quot;,true)     #=&gt; &quot;ActiveRecord&quot;
-	 *   inflector.camelCase(&quot;first_name&quot;,false)       #=&gt; &quot;firstName&quot;
-	 *   inflector.camelCase(&quot;first_name&quot;,true)        #=&gt; &quot;FirstName&quot;
-	 *   inflector.camelCase(&quot;name&quot;,false)             #=&gt; &quot;name&quot;
-	 *   inflector.camelCase(&quot;name&quot;,true)              #=&gt; &quot;Name&quot;
-	 * </pre>
-	 * 
-	 * </p>
-	 * 
-	 * @param lowerCaseAndUnderscoredWord
-	 *            the word that is to be converted to camel case
-	 * @param uppercaseFirstLetter
-	 *            true if the first character is to be uppercased, or false if
-	 *            the first character is to be lowercased
-	 * @param delimiterChars
-	 *            optional characters that are used to delimit word boundaries
-	 * @return the camel case version of the word
-	 * @see #underscore(String, char[])
-	 * @see #upperCamelCase(String, char[])
-	 * @see #lowerCamelCase(String, char[])
-	 * @author jboss
-	 */
-	public default String camelCase(String lowerCaseAndUnderscoredWord, boolean uppercaseFirstLetter, char... delimiterChars) {
-		if (lowerCaseAndUnderscoredWord == null)
-			return null;
-		lowerCaseAndUnderscoredWord = lowerCaseAndUnderscoredWord.trim();
-		if (lowerCaseAndUnderscoredWord.length() == 0)
-			return "";
-		if (uppercaseFirstLetter) {
-			String result = lowerCaseAndUnderscoredWord;
-			// Replace any extra delimiters with underscores (before the
-			// underscores are converted in the next step)...
-			if (delimiterChars != null) {
-				for (char delimiterChar : delimiterChars) {
-					result = result.replace(delimiterChar, '_');
-				}
-			}
+    /**
+     * By default, this method converts strings to UpperCamelCase. If the
+     * <code>uppercaseFirstLetter</code> argument to false, then this method
+     * produces lowerCamelCase. This method will also use any extra delimiter
+     * characters to identify word boundaries.
+     * <p>
+     * Examples:
+     * 
+     * <pre>
+     *   inflector.camelCase(&quot;active_record&quot;,false)    #=&gt; &quot;activeRecord&quot;
+     *   inflector.camelCase(&quot;active_record&quot;,true)     #=&gt; &quot;ActiveRecord&quot;
+     *   inflector.camelCase(&quot;first_name&quot;,false)       #=&gt; &quot;firstName&quot;
+     *   inflector.camelCase(&quot;first_name&quot;,true)        #=&gt; &quot;FirstName&quot;
+     *   inflector.camelCase(&quot;name&quot;,false)             #=&gt; &quot;name&quot;
+     *   inflector.camelCase(&quot;name&quot;,true)              #=&gt; &quot;Name&quot;
+     * </pre>
+     * 
+     * </p>
+     * 
+     * @param lowerCaseAndUnderscoredWord
+     *            the word that is to be converted to camel case
+     * @param uppercaseFirstLetter
+     *            true if the first character is to be uppercased, or false if the
+     *            first character is to be lowercased
+     * @param delimiterChars
+     *            optional characters that are used to delimit word boundaries
+     * @return the camel case version of the word
+     * @see #underscore(String, char[])
+     * @see #upperCamelCase(String, char[])
+     * @see #lowerCamelCase(String, char[])
+     * @author jboss
+     */
+    public default String camelCase(String lowerCaseAndUnderscoredWord, boolean uppercaseFirstLetter,
+            char... delimiterChars) {
+        if (lowerCaseAndUnderscoredWord == null)
+            return null;
+        lowerCaseAndUnderscoredWord = lowerCaseAndUnderscoredWord.trim();
+        if (lowerCaseAndUnderscoredWord.length() == 0)
+            return "";
+        if (uppercaseFirstLetter) {
+            String result = lowerCaseAndUnderscoredWord;
+            // Replace any extra delimiters with underscores (before the
+            // underscores are converted in the next step)...
+            if (delimiterChars != null) {
+                for (char delimiterChar : delimiterChars) {
+                    result = result.replace(delimiterChar, '_');
+                }
+            }
 
-			// Change the case at the beginning at after each underscore ...
-			return replaceAllWithUppercase(result, "(^|_)(.)", 2);
-		}
-		if (lowerCaseAndUnderscoredWord.length() < 2)
-			return lowerCaseAndUnderscoredWord;
-		return "" + Character.toLowerCase(lowerCaseAndUnderscoredWord.charAt(0))
-		+ camelCase(lowerCaseAndUnderscoredWord, true, delimiterChars).substring(1);
-	}
+            // Change the case at the beginning at after each underscore ...
+            return replaceAllWithUppercase(result, "(^|_)(.)", 2);
+        }
+        if (lowerCaseAndUnderscoredWord.length() < 2)
+            return lowerCaseAndUnderscoredWord;
+        return "" + Character.toLowerCase(lowerCaseAndUnderscoredWord.charAt(0))
+                + camelCase(lowerCaseAndUnderscoredWord, true, delimiterChars).substring(1);
+    }
 
-	/**
-	 * Utility method to replace all occurrences given by the specific
-	 * backreference with its uppercased form, and remove all other
-	 * backreferences.
-	 * <p>
-	 * The Java {@link Pattern regular expression processing} does not use the
-	 * preprocessing directives <code>\l</code>, <code>&#92;u</code>,
-	 * <code>\L</code>, and <code>\U</code>. If so, such directives could be
-	 * used in the replacement string to uppercase or lowercase the
-	 * backreferences. For example, <code>\L1</code> would lowercase the first
-	 * backreference, and <code>&#92;u3</code> would uppercase the 3rd
-	 * backreference.
-	 * </p>
-	 * 
-	 * @param input
-	 * @param regex
-	 * @param groupNumberToUppercase
-	 * @return the input string with the appropriate characters converted to
-	 *         upper-case
-	 * @author jboss
-	 */
-	default  String replaceAllWithUppercase(String input, String regex, int groupNumberToUppercase) {
-		Pattern underscoreAndDotPattern = Pattern.compile(regex);
-		Matcher matcher = underscoreAndDotPattern.matcher(input);
-		// CHECKSTYLE IGNORE check FOR NEXT 1 LINES
-		StringBuffer sb = new StringBuffer();
-		while (matcher.find()) {
-			matcher.appendReplacement(sb, matcher.group(groupNumberToUppercase).toUpperCase());
-		}
-		matcher.appendTail(sb);
-		return sb.toString();
-	}
-	
-	/**
-     * Returns a copy of the input with the first character converted to
-     * uppercase and the remainder to lowercase.
+    /**
+     * Utility method to replace all occurrences given by the specific backreference
+     * with its uppercased form, and remove all other backreferences.
+     * <p>
+     * The Java {@link Pattern regular expression processing} does not use the
+     * preprocessing directives <code>\l</code>, <code>&#92;u</code>,
+     * <code>\L</code>, and <code>\U</code>. If so, such directives could be used in
+     * the replacement string to uppercase or lowercase the backreferences. For
+     * example, <code>\L1</code> would lowercase the first backreference, and
+     * <code>&#92;u3</code> would uppercase the 3rd backreference.
+     * </p>
+     * 
+     * @param input
+     * @param regex
+     * @param groupNumberToUppercase
+     * @return the input string with the appropriate characters converted to
+     *         upper-case
+     * @author jboss
+     */
+    default String replaceAllWithUppercase(String input, String regex, int groupNumberToUppercase) {
+        Pattern underscoreAndDotPattern = Pattern.compile(regex);
+        Matcher matcher = underscoreAndDotPattern.matcher(input);
+        // CHECKSTYLE IGNORE check FOR NEXT 1 LINES
+        StringBuffer sb = new StringBuffer();
+        while (matcher.find()) {
+            matcher.appendReplacement(sb, matcher.group(groupNumberToUppercase).toUpperCase());
+        }
+        matcher.appendTail(sb);
+        return sb.toString();
+    }
+
+    /**
+     * Returns a copy of the input with the first character converted to uppercase
+     * and the remainder to lowercase.
      * 
      * @param words
      *            the word to be capitalized
